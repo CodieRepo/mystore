@@ -88,7 +88,7 @@ export function AdminLoginForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="admin@mystore.in"
+          placeholder="admin@snarkystore.in"
           required
           autoComplete="email"
           className="border-white/10 bg-white/5 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10"
