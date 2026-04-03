@@ -4,8 +4,8 @@ import { AdminTopbar } from "@/components/admin/layout/admin-topbar";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | MyStore Admin",
-    default: "Dashboard | MyStore Admin",
+    template: "%s | Snarky Store Admin",
+    default: "Dashboard | Snarky Store Admin",
   },
 };
 

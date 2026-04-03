@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | MyStore",
-    default: "MyStore — Your Style, Your Price",
+    template: "%s | Snarky Store",
+    default: "Snarky Store — Your Style, Your Price",
   },
   description:
     "Trendy, affordable fashion for men and women. Shop the latest styles with free delivery and COD options.",

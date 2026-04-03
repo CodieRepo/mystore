@@ -1,6 +1,6 @@
 // App-wide constants
 
-export const STORE_NAME = process.env.NEXT_PUBLIC_STORE_NAME || "MyStore";
+export const STORE_NAME = process.env.NEXT_PUBLIC_STORE_NAME || "Snarky Store";
 
 export const ORDER_STATUSES = [
   { value: "placed", label: "Placed", color: "bg-blue-100 text-blue-800" },

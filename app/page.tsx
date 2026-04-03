@@ -5,7 +5,7 @@ export default function HomePage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#F7F5F2] px-4">
       <div className="text-center max-w-lg">
         <h1 className="heading-editorial text-5xl md:text-6xl font-bold text-[#0F0F0F] mb-4">
-          MyStore
+          Snarky Store
         </h1>
         <p className="text-lg text-[#0F0F0F]/60 mb-8">
           Your Style. Your Price.

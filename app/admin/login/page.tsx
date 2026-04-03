@@ -19,7 +19,7 @@ export default function AdminLoginPage() {
         {/* Logo / Brand */}
         <div className="mb-8 text-center">
           <h1 className="heading-editorial text-4xl font-bold text-white tracking-tight">
-            MyStore
+            Snarky Store
           </h1>
           <p className="mt-2 text-sm text-white/50">
             Admin Panel
