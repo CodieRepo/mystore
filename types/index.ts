@@ -132,6 +132,16 @@ export interface Address {
   is_default: boolean;
 }
 
+export interface ShippingAddress {
+  name?: string;
+  phone?: string;
+  line1?: string;
+  line2?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+}
+
 export interface Order {
   id: string;
   order_number: string;
@@ -139,7 +149,7 @@ export interface Order {
   customer_name: string;
   customer_phone: string;
   customer_email: string | null;
-  shipping_address: Address;
+  shipping_address: ShippingAddress;
   subtotal: number;
   discount_amount: number;
   delivery_fee: number;
@@ -149,6 +159,7 @@ export interface Order {
   payment_method: PaymentMethod;
   payment_status: PaymentStatus;
   order_status: OrderStatus;
+  source_channel: string | null;
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
@@ -340,12 +351,3 @@ export interface PublicMenuItem {
   product?: Product | null;
 }
 
-export interface ShippingAddress {
-  name?: string;
-  phone?: string;
-  line1?: string;
-  line2?: string;
-  city?: string;
-  state?: string;
-  pincode?: string;
-}

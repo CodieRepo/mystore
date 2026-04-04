@@ -33,7 +33,7 @@ export function CategoryForm({ defaultValues, categoryId, trigger, onSuccess }: 
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<CategoryFormData>({
-    resolver: zodResolver(categorySchema),
+    resolver: zodResolver(categorySchema as any),
     defaultValues: {
       name: "",
       slug: "",
@@ -75,7 +75,7 @@ export function CategoryForm({ defaultValues, categoryId, trigger, onSuccess }: 
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger>
         {trigger ?? (
           <Button className="bg-brand hover:bg-brand-dark text-white gap-2">
             <Plus className="h-4 w-4" /> New Category

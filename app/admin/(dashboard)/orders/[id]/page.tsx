@@ -104,8 +104,15 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
             {o.customer_email && <p className="text-sm text-muted-foreground">{o.customer_email}</p>}
             {o.shipping_address && (
               <div className="text-xs text-muted-foreground pt-2 border-t">
-                <p>{(o.shipping_address as Record<string, string>).line1}</p>
-                <p>{(o.shipping_address as Record<string, string>).city}, {(o.shipping_address as Record<string, string>).state} – {(o.shipping_address as Record<string, string>).pincode}</p>
+                {(() => {
+                  const addr = o.shipping_address as unknown as Record<string, string>;
+                  return (
+                    <>
+                      <p>{addr.line1}</p>
+                      <p>{addr.city}, {addr.state} – {addr.pincode}</p>
+                    </>
+                  );
+                })()}
               </div>
             )}
           </div>

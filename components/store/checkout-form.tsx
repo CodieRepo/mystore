@@ -45,7 +45,7 @@ export function CheckoutClient({ menuSlug }: CheckoutClientProps) {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<CheckoutFormData>({
-    resolver: zodResolver(checkoutFormSchema),
+    resolver: zodResolver(checkoutFormSchema as any),
     defaultValues: {
       customer_name: "",
       customer_phone: "",

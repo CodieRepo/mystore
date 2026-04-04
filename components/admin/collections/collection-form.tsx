@@ -29,7 +29,7 @@ export function CollectionForm({ defaultValues, collectionId }: CollectionFormPr
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<CollectionFormData>({
-    resolver: zodResolver(collectionSchema),
+    resolver: zodResolver(collectionSchema as any),
     defaultValues: {
       name: "",
       slug: "",

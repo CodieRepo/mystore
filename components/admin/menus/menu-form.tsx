@@ -32,7 +32,7 @@ export function MenuForm({ defaultValues, menuId, offers }: MenuFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<MenuFormData>({
-    resolver: zodResolver(menuSchema),
+    resolver: zodResolver(menuSchema as any),
     defaultValues: {
       name: "",
       slug: "",

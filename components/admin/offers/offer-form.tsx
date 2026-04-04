@@ -20,13 +20,14 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { X, Loader2, Search } from "lucide-react";
-import type { Category, Collection } from "@/types";
+// Minimal shape — pages only select id + name for the scope dropdowns
+interface ScopeOption { id: string; name: string; }
 
 interface OfferFormProps {
   defaultValues?: Partial<OfferFormData>;
   offerId?: string;
-  categories: Category[];
-  collections: Collection[];
+  categories: ScopeOption[];
+  collections: ScopeOption[];
 }
 
 export function OfferForm({ defaultValues, offerId, categories, collections }: OfferFormProps) {
@@ -37,7 +38,8 @@ export function OfferForm({ defaultValues, offerId, categories, collections }: O
   const [selectedProducts, setSelectedProducts] = useState<{ id: string; title: string; sale_price: number }[]>([]);
 
   const form = useForm<OfferFormData>({
-    resolver: zodResolver(offerSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(offerSchema as any),
     defaultValues: {
       name: "",
       description: "",
