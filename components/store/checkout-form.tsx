@@ -122,21 +122,21 @@ export function CheckoutClient({ menuSlug }: CheckoutClientProps) {
               <FormField control={form.control} name="customer_name" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Full Name *</FormLabel>
-                  <FormControl><Input placeholder="Your Name" {...field} /></FormControl>
+                  <FormControl><Input placeholder="Your Name" disabled={loading} {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
               )} />
               <FormField control={form.control} name="customer_phone" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone *</FormLabel>
-                  <FormControl><Input placeholder="10-digit mobile number" type="tel" {...field} /></FormControl>
+                  <FormControl><Input placeholder="10-digit mobile number" type="tel" disabled={loading} {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
               )} />
               <FormField control={form.control} name="customer_email" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email (optional)</FormLabel>
-                  <FormControl><Input placeholder="email@example.com" type="email" {...field} /></FormControl>
+                  <FormControl><Input placeholder="email@example.com" type="email" disabled={loading} {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
               )} />
@@ -148,28 +148,28 @@ export function CheckoutClient({ menuSlug }: CheckoutClientProps) {
               <FormField control={form.control} name="shipping_address.line1" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address Line 1 *</FormLabel>
-                  <FormControl><Input placeholder="House No., Street, Area" {...field} /></FormControl>
+                  <FormControl><Input placeholder="House No., Street, Area" disabled={loading} {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
               )} />
               <FormField control={form.control} name="shipping_address.line2" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address Line 2</FormLabel>
-                  <FormControl><Input placeholder="Landmark (optional)" {...field} /></FormControl>
+                  <FormControl><Input placeholder="Landmark (optional)" disabled={loading} {...field} /></FormControl>
                 </FormItem>
               )} />
               <div className="grid grid-cols-2 gap-3">
                 <FormField control={form.control} name="shipping_address.city" render={({ field }) => (
                   <FormItem>
                     <FormLabel>City *</FormLabel>
-                    <FormControl><Input placeholder="Mumbai" {...field} /></FormControl>
+                    <FormControl><Input placeholder="Mumbai" disabled={loading} {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField control={form.control} name="shipping_address.pincode" render={({ field }) => (
                   <FormItem>
                     <FormLabel>Pincode *</FormLabel>
-                    <FormControl><Input placeholder="400001" maxLength={6} {...field} /></FormControl>
+                    <FormControl><Input placeholder="400001" maxLength={6} disabled={loading} {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -177,7 +177,7 @@ export function CheckoutClient({ menuSlug }: CheckoutClientProps) {
               <FormField control={form.control} name="shipping_address.state" render={({ field }) => (
                 <FormItem>
                   <FormLabel>State *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} defaultValue={field.value} disabled={loading}>
                     <FormControl><SelectTrigger><SelectValue placeholder="Select state" /></SelectTrigger></FormControl>
                     <SelectContent>
                       {INDIAN_STATES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
@@ -194,7 +194,7 @@ export function CheckoutClient({ menuSlug }: CheckoutClientProps) {
               {items.map(item => (
                 <div key={`${item.product_id}_${item.variant_id}_${item.size}`} className="flex items-center gap-3">
                   {item.primary_image && (
-                    <Image src={item.primary_image} alt={item.title} width={40} height={52} className="rounded object-cover w-10 h-14 shrink-0" />
+                    <Image src={item.primary_image} alt={item.title} width={40} height={52} className="rounded object-cover w-10 h-14 shrink-0" placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkcBxU2/o2QAAAAASUVORK5CYII=" />
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium line-clamp-1">{item.title}</p>

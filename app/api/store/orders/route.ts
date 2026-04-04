@@ -41,11 +41,23 @@ export async function POST(request: NextRequest) {
     const productsMap = new Map((productsData || []).map(p => [p.id, p]));
     const variantsMap = new Map((variantsData || []).map(v => [v.id, v]));
 
-    // 2. Validate all items are still active
+    // 2. Validate all items are still active and have sufficient stock
     for (const item of items) {
       const product = productsMap.get(item.product_id);
       if (!product || !product.is_active || product.is_draft) {
         return NextResponse.json({ data: null, error: `Product no longer available`, success: false }, { status: 400 });
+      }
+      const variant = variantsMap.get(item.variant_id);
+      if (!variant) {
+        return NextResponse.json({ data: null, error: `Variant no longer available`, success: false }, { status: 400 });
+      }
+      if (variant.stock_qty < item.qty) {
+        return NextResponse.json({ 
+          data: { product_id: product.id, variant_id: variant.id, available: variant.stock_qty },
+          errorCode: "INSUFFICIENT_STOCK",
+          error: `Insufficient stock for ${product.title} (${variant.size}). Available: ${variant.stock_qty}`,
+          success: false 
+        }, { status: 400 });
       }
     }
 

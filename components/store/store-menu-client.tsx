@@ -139,6 +139,8 @@ function ProductCard({ item, checkoutMode, menuSlug }: {
             fill
             className="object-cover"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkcBxU2/o2QAAAAASUVORK5CYII="
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-muted-foreground text-4xl">👗</div>
@@ -239,7 +241,7 @@ function CartDrawer({ menuSlug, checkoutMode }: { menuSlug: string; checkoutMode
                 <div key={`${item.product_id}_${item.variant_id}_${item.size}`} className="flex gap-3">
                   {item.primary_image && (
                     <div className="relative w-16 h-20 rounded-lg overflow-hidden shrink-0 bg-muted">
-                      <Image src={item.primary_image} alt={item.title} fill className="object-cover" />
+                      <Image src={item.primary_image} alt={item.title} fill className="object-cover" placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkcBxU2/o2QAAAAASUVORK5CYII=" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">

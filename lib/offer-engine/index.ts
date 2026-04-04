@@ -94,9 +94,20 @@ function resolveFlat(item: CartItem, rules: OfferRule, offer: Offer, totalEligib
 // ─── Combo resolver ────────────────────────────
 
 /**
- * combo_fixed: any {qty} items from scope at {price} total.
- * Items beyond complete combos pay regular sale_price.
- * Example: any 2 shirts @ ₹999 → each shirt in the pair = ₹499.50
+ * Resolves pricing for `combo_fixed` offers (e.g., Any 2 for ₹999). 
+ * This treats the cart globally instead of on a per-item basis.
+ * 
+ * Behavior:
+ * 1. Collects all targeted units and sorts them by default price descending.
+ * 2. Groups them into sets equivalent to `rules.qty` (the minimum size).
+ * 3. Applies the combo `rules.price` exclusively to units within complete sets.
+ * 4. Any "remainder" units that don't fit into a complete combo set retain their original `sale_price`.
+ * 
+ * @param eligibleItems - The subset of CartItems matched within the scope of the combo offer.
+ * @param rules - The computational structure defining the combo (requires `qty` and `price`).
+ * @param offer - The overall Offer entity dictating labels and metadata.
+ * @param allItems - The entire unfiltered list of CartItems to securely rebuild the cart.
+ * @returns An updated array of `ResolvedItem` covering the full cart with combo logic deeply applied.
  */
 function resolveComboItems(
   eligibleItems: CartItem[],
@@ -159,8 +170,20 @@ function resolveComboItems(
 // ─── Main resolver ─────────────────────────────
 
 /**
- * Resolves offers for a cart in a given context.
- * Returns resolved items with offer prices + savings.
+ * The core computational heart of the Snarky Store Offer Engine.
+ * Takes a raw cart and array of active offers, outputting the finalized monetary total.
+ * 
+ * Rules of Engagement (Phase 1):
+ * - Evaluates offers sequentially based on `priority` (lower numbers evaluate first).
+ * - Only evaluates offers that align with the active Context (time, channel, availability).
+ * - Applies standard items natively (fixed, flat, pct).
+ * - Diverts exclusively to `resolveComboItems` if a combo applies. Combos inherently break combination loops.
+ * - Stops cascading further offers if the successfully applied offer declares `is_combinable: false`.
+ * 
+ * @param items - A raw incoming array of generic `CartItem` representing the user's cart.
+ * @param offers - All potential active offers (can be a subset attached to a specific `public_menu`).
+ * @param context - Environmental constraints ensuring expired or incorrect-channel offers are ignored.
+ * @returns A computed `ResolutionResult` payload ready for rendering or database insertion.
  */
 export function resolveOffers(
   items: CartItem[],
@@ -263,8 +286,16 @@ export function resolveOffers(
 }
 
 /**
- * Compute a simple display price for a single product given a list of offers.
- * Used in menu rendering to show "offer price" without a full cart.
+ * Instantly computes the theoretical discount state of a single unit.
+ * Extremely useful for rendering UI store shelves and "Storefront Pages" without requiring a populated local cart.
+ * 
+ * Uses a dummy `__display__` variant string against the full `resolveOffers` pipeline
+ * to guarantee that UI Badges perfectly match eventual Cart Totals.
+ * 
+ * @param product - A slimmed-down product entity mapping only core attributes (id, categories, prices).
+ * @param offers - Potential active offers running on the storefront.
+ * @param context - Environmental constraints.
+ * @returns The boolean state of savings, including the formatted tag `offer_label` for badge insertion.
  */
 export function resolveProductDisplayPrice(
   product: { id: string; category_id: string | null; collection_ids: string[]; sale_price: number; mrp: number },
