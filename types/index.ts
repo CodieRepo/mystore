@@ -267,3 +267,85 @@ export interface DashboardStats {
   totalProducts: number;
   totalCustomers: number;
 }
+
+// ===========================
+// Phase 1 — Offer Engine Types
+// ===========================
+
+export type OfferType = "fixed_price" | "percentage" | "flat" | "combo_fixed";
+export type ScopeType = "all" | "category" | "collection" | "product_set";
+
+export interface Offer {
+  id: string;
+  name: string;
+  description: string | null;
+  offer_type: OfferType;
+  scope_type: ScopeType;
+  scope_ref_id: string | null;
+  rules: Record<string, number>;
+  applicable_channels: string[];
+  valid_from: string | null;
+  valid_until: string | null;
+  is_active: boolean;
+  priority: number;
+  is_combinable: boolean;
+  created_at: string;
+  updated_at: string;
+  // Joined
+  product_ids?: string[];
+}
+
+// ===========================
+// Phase 1 — Public Menu Types
+// ===========================
+
+export interface PublicMenu {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  offer_id: string | null;
+  checkout_mode: "whatsapp" | "direct";
+  whatsapp_number: string | null;
+  is_active: boolean;
+  expires_at: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  created_at: string;
+  updated_at: string;
+  // Joined
+  offer?: Offer | null;
+  sections?: PublicMenuSection[];
+}
+
+export interface PublicMenuSection {
+  id: string;
+  menu_id: string;
+  title: string;
+  subtitle: string | null;
+  sort_order: number;
+  created_at: string;
+  items?: PublicMenuItem[];
+}
+
+export interface PublicMenuItem {
+  id: string;
+  section_id: string;
+  item_type: "product" | "collection";
+  product_id: string | null;
+  collection_id: string | null;
+  price_override: number | null;
+  sort_order: number;
+  product?: Product | null;
+}
+
+export interface ShippingAddress {
+  name?: string;
+  phone?: string;
+  line1?: string;
+  line2?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+}

@@ -49,6 +49,9 @@ export const ADMIN_NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: "LayoutDashboard" },
   { href: "/admin/products", label: "Products", icon: "Package" },
   { href: "/admin/categories", label: "Categories", icon: "Tag" },
+  { href: "/admin/collections", label: "Collections", icon: "Layers" },
+  { href: "/admin/offers", label: "Offers", icon: "Percent" },
+  { href: "/admin/menus", label: "Public Menus", icon: "LinkIcon" },
   { href: "/admin/orders", label: "Orders", icon: "ShoppingCart" },
   { href: "/admin/customers", label: "Customers", icon: "Users" },
   { href: "/admin/banners", label: "Banners", icon: "Image" },
@@ -58,3 +61,45 @@ export const ADMIN_NAV_ITEMS = [
   { href: "/admin/media", label: "Media", icon: "ImagePlus" },
   { href: "/admin/settings", label: "Settings", icon: "Settings" },
 ] as const;
+
+// ===========================
+// Phase 1 — Offer Engine Constants
+// ===========================
+
+export const OFFER_TYPES = [
+  { value: "fixed_price", label: "Fixed Price", description: "All selected items at a fixed price each" },
+  { value: "percentage", label: "Percentage Off", description: "Percentage discount off sale price" },
+  { value: "flat", label: "Flat Discount", description: "Fixed amount off the eligible subtotal" },
+  { value: "combo_fixed", label: "Combo Deal", description: "Any N items from scope at a fixed total price" },
+] as const;
+
+export const SCOPE_TYPES = [
+  { value: "all", label: "Entire Store", description: "Applies to all products" },
+  { value: "category", label: "Category", description: "Applies to a specific category" },
+  { value: "collection", label: "Collection", description: "Applies to a specific collection" },
+  { value: "product_set", label: "Selected Products", description: "Applies to manually selected products" },
+] as const;
+
+export const CHANNELS = [
+  { value: "website", label: "Website" },
+  { value: "whatsapp", label: "WhatsApp" },
+  { value: "direct", label: "Direct / Manual" },
+  { value: "meesho", label: "Meesho" },
+  { value: "meta", label: "Meta / Instagram" },
+] as const;
+
+export const CHECKOUT_MODES = [
+  { value: "whatsapp", label: "WhatsApp Order", description: "Customer sends WhatsApp message to order" },
+  { value: "direct", label: "Direct Checkout", description: "Customer fills form, order appears in admin" },
+] as const;
+
+export const INDIAN_STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
+  "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+  "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+  "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry",
+] as const;
+

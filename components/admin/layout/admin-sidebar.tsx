@@ -8,7 +8,7 @@ import { ADMIN_NAV_ITEMS, STORE_NAME } from "@/lib/constants";
 import {
   LayoutDashboard, Package, Tag, ShoppingCart, Users, Image,
   Ticket, Megaphone, Warehouse, ImagePlus, Settings,
-  ChevronLeft, LogOut, Menu, X, Store
+  ChevronLeft, LogOut, Menu, X, Store, Layers, Percent, Link as LinkIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard, Package, Tag, ShoppingCart, Users, Image,
   Ticket, Megaphone, Warehouse, ImagePlus, Settings,
+  Layers, Percent, LinkIcon,
 };
 
 export function AdminSidebar() {
