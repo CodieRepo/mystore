@@ -66,7 +66,7 @@ export function OrdersTable({ orders, totalPages, currentPage, currentStatus, cu
             onKeyDown={e => e.key === "Enter" && applyFilters({ search })}
           />
         </div>
-        <Select value={currentStatus} onValueChange={v => applyFilters({ status: v })}>
+        <Select value={currentStatus || ""} onValueChange={(v: string | null) => applyFilters({ status: v ?? "" })}>
           <SelectTrigger className="w-44">
             <SelectValue placeholder="All Statuses" />
           </SelectTrigger>

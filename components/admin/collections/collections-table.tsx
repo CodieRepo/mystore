@@ -70,11 +70,11 @@ export function CollectionsTable({ collections }: CollectionsTableProps) {
               <TableCell><StatusBadge status={col.is_active ? "active" : "inactive"} /></TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                  <DropdownMenuTrigger>
                     <Button variant="ghost" size="icon" disabled={loading === col.id}><MoreHorizontal className="h-4 w-4" /></Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem asChild>
+                    <DropdownMenuItem>
                       <Link href={`/admin/collections/${col.id}`}><Edit className="h-4 w-4 mr-2" /> Edit & Manage Products</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => toggleActive(col)}>

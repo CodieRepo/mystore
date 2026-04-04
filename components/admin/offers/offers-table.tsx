@@ -154,13 +154,13 @@ export function OffersTable({ offers }: OffersTableProps) {
                 </TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger>
                       <Button variant="ghost" size="icon" disabled={loading === offer.id}>
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
+                      <DropdownMenuItem>
                         <Link href={`/admin/offers/${offer.id}`}>
                           <Edit className="h-4 w-4 mr-2" /> Edit
                         </Link>

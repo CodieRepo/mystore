@@ -85,19 +85,21 @@ function ProductCard({ item, checkoutMode, menuSlug }: {
   const product = item.product;
   const rp = item.resolved_price;
   if (!product || !product.is_active) return null;
+  // Non-null alias for use in closures (TS can't narrow across closures after early return)
+  const p = product;
 
-  const sizes = [...new Set(product.variants?.map(v => v.size) ?? [])];
+  const sizes = [...new Set(p.variants?.map(v => v.size) ?? [])];
   const availableSizes = sizes.filter(size => {
-    const variantsForSize = product.variants?.filter(v => v.size === size) ?? [];
+    const variantsForSize = p.variants?.filter(v => v.size === size) ?? [];
     return variantsForSize.some(v => v.stock_qty > 0);
   });
 
-  const displayPrice = rp?.offer_price ?? product.sale_price;
-  const originalPrice = rp?.original_price ?? product.mrp;
+  const displayPrice = rp?.offer_price ?? p.sale_price;
+  const originalPrice = rp?.original_price ?? p.mrp;
   const hasOffer = rp?.has_offer ?? false;
   const savings = rp?.savings ?? 0;
   const offerLabel = rp?.offer_label;
-  const isOutOfStock = product.total_stock === 0;
+  const isOutOfStock = p.total_stock === 0;
   const discountPct = originalPrice > displayPrice ? Math.round((1 - displayPrice / originalPrice) * 100) : 0;
 
   function handleAddToCart() {
@@ -107,22 +109,22 @@ function ProductCard({ item, checkoutMode, menuSlug }: {
       return;
     }
     const size = selectedSize || availableSizes[0] || sizes[0];
-    const variant = product.variants?.find(v => v.size === size && v.stock_qty > 0) ?? product.variants?.[0];
+    const variant = p.variants?.find(v => v.size === size && v.stock_qty > 0) ?? p.variants?.[0];
     if (!variant) return;
 
     addItem({
-      product_id: product.id,
+      product_id: p.id,
       variant_id: variant.id,
-      title: product.title,
-      primary_image: product.primary_image,
+      title: p.title,
+      primary_image: p.primary_image,
       size,
       color: variant.color,
       offer_price: displayPrice,
-      sale_price: product.sale_price,
-      mrp: product.mrp,
-      offer_label: offerLabel,
+      sale_price: p.sale_price,
+      mrp: p.mrp,
+      offer_label: offerLabel ?? null,
     });
-    toast.success(`${product.title} (${size}) added to cart`);
+    toast.success(`${p.title} (${size}) added to cart`);
     setShowSizes(false);
   }
 
@@ -130,10 +132,10 @@ function ProductCard({ item, checkoutMode, menuSlug }: {
     <div className="bg-card rounded-xl overflow-hidden border border-border hover:shadow-md transition-shadow duration-200">
       {/* Image */}
       <div className="relative aspect-[3/4] bg-muted overflow-hidden">
-        {product.primary_image ? (
+        {p.primary_image ? (
           <Image
-            src={product.primary_image}
-            alt={product.title}
+            src={p.primary_image}
+            alt={p.title}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -152,7 +154,7 @@ function ProductCard({ item, checkoutMode, menuSlug }: {
 
       {/* Info */}
       <div className="p-3">
-        <h3 className="text-sm font-medium line-clamp-2 mb-1">{product.title}</h3>
+        <h3 className="text-sm font-medium line-clamp-2 mb-1">{p.title}</h3>
 
         {/* Price */}
         <div className="mb-2">

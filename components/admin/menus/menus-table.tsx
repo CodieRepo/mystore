@@ -103,11 +103,11 @@ export function MenusTable({ menus, baseUrl }: MenusTableProps) {
                 <TableCell><StatusBadge status={menu.is_active ? "active" : "inactive"} /></TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger>
                       <Button variant="ghost" size="icon" disabled={loading === menu.id}><MoreHorizontal className="h-4 w-4" /></Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
+                      <DropdownMenuItem>
                         <Link href={`/admin/menus/${menu.id}`}><Edit className="h-4 w-4 mr-2" /> Edit & Build Sections</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => copyLink(menu.slug)}>

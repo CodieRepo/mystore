@@ -61,7 +61,7 @@ export function OrderStatusUpdater({ orderId, currentStatus }: OrderStatusUpdate
       <h3 className="text-sm font-semibold">Update Status</h3>
       <div className="space-y-2">
         <Label className="text-xs text-muted-foreground">New Status</Label>
-        <Select value={status} onValueChange={v => setStatus(v as OrderStatus)}>
+        <Select value={status} onValueChange={v => { if (v) setStatus(v as OrderStatus); }}>
           <SelectTrigger><SelectValue /></SelectTrigger>
           <SelectContent>
             {ORDER_STATUS_OPTIONS.map(opt => (
